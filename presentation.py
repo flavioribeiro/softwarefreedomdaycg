@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 from cocos.sprite import *
 from cocos.director import director
 from cocos.layer import Layer
@@ -25,7 +27,7 @@ class Presentation(Scene):
         self.transform()
         self.img.blit(0,0)
         glPopMatrix()
-        
+
 class Intra(Layer):
 
     def __init__(self):
@@ -53,16 +55,46 @@ class Intra(Layer):
                 font_name = 'mandingo',
                 font_size=16,
                 anchor_x='center',anchor_y='center',
-                color=(0, 0, 0, 200)
+                color=(0, 0, 0, 255)
                 )
         label.position = 700, 30
         self.add(label)
 
+class TextSlide(Layer):
+
+    def __init__(self, title, *lines):
+        super(TextSlide, self).__init__()
+
+        self.title = title
+
+        label = Label(self.title, font_name = 'super mario bros.', font_size=60,\
+                        anchor_x='center', anchor_y='center', color=(0,0,0, 255) )
+        label.position = 750, 650
+        self.add(label)
+
+        pos = 550
+
+        for line in lines:
+            label = Label(line, font_name = 'happy sans', font_size=24,color=(0,0,0, 255))
+            label.position = 100, pos
+            self.add(label)
+            pos-=45
+
+
 if __name__ == "__main__":
     font_path = os.path.join( os.path.dirname(__file__), 'media/fonts')
     font.add_directory(font_path)
+    director.init(resizable=True, width=1024, height=728, fullscreen=False) #false por enquanto
+    scene = Scene(Presentation())
 
-    director.init(resizable=True, width=1024, height=728, fullscreen=True)
-    _scene = Scene(Presentation())
-    _scene.add(Intra(), z=1)
-    director.run(_scene)
+
+    scene.add(TextSlide( \
+        u'About me',
+        u'- Flávio Ribeiro',
+        u'- COBRATEAM Developer (http://cobrateam.info)',
+        u'- Engenheiro de Software @ Avaty! Tecnologia (http://avaty.com.br)',
+        u'- Engenharia Eletrica @ IFPB (http://ifpb.edu.br)',
+        u'- GSoC2010 @ BlueZ (http://bluez.org)',
+        u'- twitter.com/flavioribeiro',
+        ), z=1)
+    director.run(scene)
