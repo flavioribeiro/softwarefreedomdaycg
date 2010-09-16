@@ -49,6 +49,15 @@ class Intra(Layer):
         label.position = 1024/2, (728-30)/2
         self.add(label)
 
+        label = Label('''Software Freedom Day 2010 @ Campina Grande''',
+                font_name = 'mandingo',
+                font_size=16,
+                anchor_x='center',anchor_y='center',
+                color=(0, 0, 0, 200)
+                )
+        label.position = 700, 30
+        self.add(label)
+
 if __name__ == "__main__":
     font_path = os.path.join( os.path.dirname(__file__), 'media/fonts')
     font.add_directory(font_path)
