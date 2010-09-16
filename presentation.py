@@ -76,9 +76,8 @@ class TextSlide(Layer):
     def __init__(self, title, *lines):
         super(TextSlide, self).__init__()
 
-        label = Label(title, font_name = 'super mario bros.', font_size=60,\
-                        anchor_x='center', anchor_y='center', color=(0,0,0, 255) )
-        label.position = 750, 650
+        label = Label(title, font_name = 'super mario bros.', font_size=60, color=(0,0,0, 255) )
+        label.position = 350, 640
         self.add(label)
 
         pos = 550
@@ -95,6 +94,32 @@ class TextSlide(Layer):
         elif _key == key.RIGHT:
             SlidesManager.next()
 
+class ImageSlide(Layer):
+
+    is_event_handler = True
+
+    def __init__(self, title, line, image=None):
+        super(ImageSlide, self).__init__()
+
+        label = Label(title, font_name = 'super mario bros.', font_size=60, color=(0,0,0, 255) )
+        label.position = 350, 640
+        self.add(label)
+
+        label = Label(line, font_name = 'mandingo', font_size=20, color=(0,0,0, 255) )
+        label.position = 60, 580
+        self.add(label)
+
+        self.img = Sprite(image)
+        self.img.position = 550, 350
+        self.add(self.img)
+
+    def on_key_press(self, _key, modifiers):
+        if _key == key.LEFT:
+            SlidesManager.previous()
+        elif _key == key.RIGHT:
+            SlidesManager.next()
+
+
 class SlidesManager(object):
 
     def build_slides(self):
@@ -109,12 +134,27 @@ class SlidesManager(object):
                 u'- twitter.com/flavioribeiro'),
 
             TextSlide(
-                u'Por que Python e Jogos?',
+                u'Roteiro',
+                u'- O que me levou a fazer essa palestra...',
+                u'- Conceitos do desenvolvimento de games',
+                u'- Python e seus frameworks de games',
+                u'- Cocos2d',
+                u'- Demos'),
+
+            TextSlide(
+                u'Por que?',
                 u'- Python é adotada pro ensino da programação da UFCG',
                 u'- O projeto final de alguns alunos é um game',
                 u'- Fazer jogos é tão divertido quanto fazer robôs',
                 u'- Apresentar um pouco do que aprendi na PyWeek'
-                )
+                ),
+
+
+            ImageSlide(
+                u'Ex de Imagem',
+                u'- Python é adotada pro ensino da programação da UFCG',
+                image="media/imgs/me.png"),
+
         ]
 
         self.__class__.current_position = 0
@@ -133,7 +173,7 @@ class SlidesManager(object):
     def previous():
         if SlidesManager.current_position == 0 or \
             SlidesManager.current_position-1 > len(SlidesManager.slides_pool):
-            
+
             return
 
         SlidesManager.current_position-=1
@@ -144,7 +184,7 @@ class SlidesManager(object):
 
 
 if __name__ == "__main__":
-    director.init(resizable=True, width=1024, height=728, fullscreen=True) 
+    director.init(resizable=True, width=1024, height=728, fullscreen=False) 
     font_path = os.path.join( os.path.dirname(__file__), 'media/fonts')
     font.add_directory(font_path)
 
