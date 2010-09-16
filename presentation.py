@@ -144,7 +144,7 @@ class SlidesManager(object):
 
 
 if __name__ == "__main__":
-    director.init(resizable=True, width=1024, height=728, fullscreen=False) #false por enquanto
+    director.init(resizable=True, width=1024, height=728, fullscreen=True) 
     font_path = os.path.join( os.path.dirname(__file__), 'media/fonts')
     font.add_directory(font_path)
 
