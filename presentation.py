@@ -109,15 +109,21 @@ class SlidesManager(object):
                 u'- twitter.com/flavioribeiro'),
 
             TextSlide(
-                u'TESTING',
-                u'Only Testing')
+                u'Por que Python e Jogos?',
+                u'- Python é adotada pro ensino da programação da UFCG',
+                u'- O projeto final de alguns alunos é um game',
+                u'- Fazer jogos é tão divertido quanto fazer robôs',
+                u'- Apresentar um pouco do que aprendi na PyWeek'
+                )
         ]
 
         self.__class__.current_position = 0
  
     @staticmethod
     def next():
-        print 'apertou pra direita', SlidesManager.current_position
+        if SlidesManager.current_position+1 > len(SlidesManager.slides_pool):
+            return
+
         scene = Scene(Presentation())
         scene.add(SlidesManager.slides_pool[SlidesManager.current_position], z=1)
         SlidesManager.current_position+=1
@@ -125,11 +131,12 @@ class SlidesManager(object):
 
     @staticmethod
     def previous():
-        if SlidesManager.current_position == 0:
+        if SlidesManager.current_position == 0 or \
+            SlidesManager.current_position-1 > len(SlidesManager.slides_pool):
+            
             return
 
         SlidesManager.current_position-=1
-        print 'apertou pra esquerda', SlidesManager.current_position
         scene = Scene(Presentation())
         scene.add(SlidesManager.slides_pool[SlidesManager.current_position], z=1)
         director.push(scene)
