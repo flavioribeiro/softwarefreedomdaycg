@@ -146,13 +146,19 @@ class SlidesManager(object):
                 u'- Python é adotada pro ensino da programação da UFCG',
                 u'- O projeto final de alguns alunos é um game',
                 u'- Fazer jogos é tão divertido quanto fazer robôs',
-                u'- Apresentar um pouco do que aprendi na PyWeek'
+                u'- Apresentar um pouco do que aprendi na PyWeek',
+                u'- Falar algo diferente de embarcados e marmota.mobi'
+                ),
+
+            TextSlide(
+                u'Game Concepts',
+                u'- ae',
                 ),
 
 
             ImageSlide(
                 u'Ex de Imagem',
-                u'- Python é adotada pro ensino da programação da UFCG',
+                u'- Esse sou eu!',
                 image="media/imgs/me.png"),
 
         ]
