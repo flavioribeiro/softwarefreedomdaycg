@@ -1,0 +1,24 @@
+Apresentação
+FreeNode
+O que me levou a fazer essa palestra..
+Desenvolvimento de Jogos
+Alguns conceitos
+- Surface
+- Rect
+- Events
+- Sprite
+- GameLoop
+- Colisão
+
+Python
+Framework de Jogos pra Python
+hmm.. mas o que são frameworks?
+PyOgre, Panda3d
+PyGame
+Exemplos da API (Sprite, Colisão, grupos, gameloop, SDL)
+Screenshots de Games em PyGame
+Cocos2d
+Exemplos da API
+Exemplos de Actions (mt importante)
+Cocos2d for iPhone
+Joguinho da PyWeek
