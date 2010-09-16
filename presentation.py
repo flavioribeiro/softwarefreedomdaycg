@@ -30,6 +30,8 @@ class Presentation(Scene):
 
 class Intra(Layer):
 
+    is_event_handler = True
+
     def __init__(self):
         super(Intra, self).__init__()
 
@@ -60,6 +62,13 @@ class Intra(Layer):
         label.position = 700, 30
         self.add(label)
 
+    def on_key_press(self, _key, modifiers):
+        if _key == key.LEFT:
+            SlidesManager.previous()
+        elif _key == key.RIGHT:
+            SlidesManager.next()
+
+
 class TextSlide(Layer):
 
     is_event_handler = True
@@ -72,8 +81,6 @@ class TextSlide(Layer):
         label.position = 750, 650
         self.add(label)
 
-    #    slides_manager = SlidesManager()
-
         pos = 550
 
         for line in lines:
@@ -83,17 +90,15 @@ class TextSlide(Layer):
             pos-=45
 
     def on_key_press(self, _key, modifiers):
-
         if _key == key.LEFT:
-     #       slides_manager.previous()
-            print 'po'
+            SlidesManager.previous()
         elif _key == key.RIGHT:
-#            slides_manager.next()
-            print 'ae'
+            SlidesManager.next()
 
 class SlidesManager(object):
-    def __init__(self):
-        slides_pool = [
+
+    def build_slides(self):
+        self.__class__.slides_pool = [
             TextSlide(
                 u'About me',
                 u'- Flávio Ribeiro',
@@ -102,32 +107,43 @@ class SlidesManager(object):
                 u'- Engenharia Eletrica @ IFPB (http://ifpb.edu.br)',
                 u'- GSoC2010 @ BlueZ (http://bluez.org)',
                 u'- twitter.com/flavioribeiro'),
+
             TextSlide(
                 u'TESTING',
                 u'Only Testing')
-            ]
+        ]
 
-    current_position = 0
+        self.__class__.current_position = 0
+ 
+    @staticmethod
+    def next():
+        print 'apertou pra direita', SlidesManager.current_position
+        scene = Scene(Presentation())
+        scene.add(SlidesManager.slides_pool[SlidesManager.current_position], z=1)
+        SlidesManager.current_position+=1
+        director.push(scene)
 
-    def next(self):
-        current_position+=1
-        yield slides_pool[current_position]
+    @staticmethod
+    def previous():
+        if SlidesManager.current_position == 0:
+            return
 
-    def previous(self):
-        print 'TENSO'
+        SlidesManager.current_position-=1
+        print 'apertou pra esquerda', SlidesManager.current_position
+        scene = Scene(Presentation())
+        scene.add(SlidesManager.slides_pool[SlidesManager.current_position], z=1)
+        director.push(scene)
+
+
 
 if __name__ == "__main__":
     director.init(resizable=True, width=1024, height=728, fullscreen=False) #false por enquanto
     font_path = os.path.join( os.path.dirname(__file__), 'media/fonts')
     font.add_directory(font_path)
 
+    slides_manager = SlidesManager()
+    slides_manager.build_slides()
+
     scene = Scene(Presentation())
-    scene.add(TextSlide(
-                u'About me',
-                u'- Flávio Ribeiro',
-                u'- COBRATEAM Developer (http://cobrateam.info)',
-                u'- Engenheiro de Software @ Avaty! Tecnologia (http://avaty.com.br)',
-                u'- Engenharia Eletrica @ IFPB (http://ifpb.edu.br)',
-                u'- GSoC2010 @ BlueZ (http://bluez.org)',
-                u'- twitter.com/flavioribeiro'))
+    scene.add(Intra(), z=1)
     director.run(scene)
