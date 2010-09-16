@@ -62,15 +62,17 @@ class Intra(Layer):
 
 class TextSlide(Layer):
 
+    is_event_handler = True
+
     def __init__(self, title, *lines):
         super(TextSlide, self).__init__()
 
-        self.title = title
-
-        label = Label(self.title, font_name = 'super mario bros.', font_size=60,\
+        label = Label(title, font_name = 'super mario bros.', font_size=60,\
                         anchor_x='center', anchor_y='center', color=(0,0,0, 255) )
         label.position = 750, 650
         self.add(label)
+
+    #    slides_manager = SlidesManager()
 
         pos = 550
 
@@ -80,21 +82,52 @@ class TextSlide(Layer):
             self.add(label)
             pos-=45
 
+    def on_key_press(self, _key, modifiers):
+
+        if _key == key.LEFT:
+     #       slides_manager.previous()
+            print 'po'
+        elif _key == key.RIGHT:
+#            slides_manager.next()
+            print 'ae'
+
+class SlidesManager(object):
+    def __init__(self):
+        slides_pool = [
+            TextSlide(
+                u'About me',
+                u'- Flávio Ribeiro',
+                u'- COBRATEAM Developer (http://cobrateam.info)',
+                u'- Engenheiro de Software @ Avaty! Tecnologia (http://avaty.com.br)',
+                u'- Engenharia Eletrica @ IFPB (http://ifpb.edu.br)',
+                u'- GSoC2010 @ BlueZ (http://bluez.org)',
+                u'- twitter.com/flavioribeiro'),
+            TextSlide(
+                u'TESTING',
+                u'Only Testing')
+            ]
+
+    current_position = 0
+
+    def next(self):
+        current_position+=1
+        yield slides_pool[current_position]
+
+    def previous(self):
+        print 'TENSO'
 
 if __name__ == "__main__":
+    director.init(resizable=True, width=1024, height=728, fullscreen=False) #false por enquanto
     font_path = os.path.join( os.path.dirname(__file__), 'media/fonts')
     font.add_directory(font_path)
-    director.init(resizable=True, width=1024, height=728, fullscreen=False) #false por enquanto
+
     scene = Scene(Presentation())
-
-
-    scene.add(TextSlide( \
-        u'About me',
-        u'- Flávio Ribeiro',
-        u'- COBRATEAM Developer (http://cobrateam.info)',
-        u'- Engenheiro de Software @ Avaty! Tecnologia (http://avaty.com.br)',
-        u'- Engenharia Eletrica @ IFPB (http://ifpb.edu.br)',
-        u'- GSoC2010 @ BlueZ (http://bluez.org)',
-        u'- twitter.com/flavioribeiro',
-        ), z=1)
+    scene.add(TextSlide(
+                u'About me',
+                u'- Flávio Ribeiro',
+                u'- COBRATEAM Developer (http://cobrateam.info)',
+                u'- Engenheiro de Software @ Avaty! Tecnologia (http://avaty.com.br)',
+                u'- Engenharia Eletrica @ IFPB (http://ifpb.edu.br)',
+                u'- GSoC2010 @ BlueZ (http://bluez.org)',
+                u'- twitter.com/flavioribeiro'))
     director.run(scene)
