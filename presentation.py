@@ -321,7 +321,7 @@ class SlidesManager(object):
         scene.add(SlidesManager.slides_pool[SlidesManager.current_position], z=1)
         SlidesManager.current_position+=1
        
-        trans = [ FadeTRTransition, FlipX3DTransition, CornerMoveTransition, ShuffleTransition, FlipY3DTransition, EnvelopeTransition, TurnOffTilesTransition, ZoomTransition ]
+        trans = [ FadeTRTransition, FlipX3DTransition, CornerMoveTransition, ShuffleTransition, FlipY3DTransition, EnvelopeTransition, ZoomTransition ]
         t = choice(trans)
         director.replace( t(scene, duration=1))
 
