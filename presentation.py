@@ -121,10 +121,44 @@ class ImageSlide(Layer):
             SlidesManager.next()
 
 
+class ActionSlide(Layer):
+
+    is_event_handler = True
+
+    def __init__(self, title, line, action, image=None):
+        super(ActionSlide, self).__init__()
+
+        label = Label(title, font_name = 'super mario bros.', font_size=60, color=(0,0,0, 255) )
+        label.position = 350, 640
+        self.add(label)
+
+        label = Label(line, font_name = 'mandingo', font_size=20, color=(0,0,0, 255) )
+        label.position = 60, 580
+        self.add(label)
+
+        self.img = Sprite(image)
+        self.img.position = 550, 350
+        self.add(self.img)
+	self.action = action
+	self.first_time = True #GAMBI ESCROOOOOOOOOOOTA
+	self.schedule_interval(self.do_action, 2)
+
+    def do_action(self, *args):
+	if self.first_time:
+		self.img.do(self.action)
+		self.first_time = False
+
+    def on_key_press(self, _key, modifiers):
+        if _key == key.LEFT:
+            SlidesManager.previous()
+        elif _key == key.RIGHT:
+            SlidesManager.next()
+
 class SlidesManager(object):
 
     def build_slides(self):
         self.__class__.slides_pool = [
+
             TextSlide(
                 u'About me',
                 u'- Flávio Ribeiro',
@@ -286,16 +320,63 @@ class SlidesManager(object):
    TextSlide(
                 u'Cocos2d',
                 u'- Curva de aprendizado baixa',
-                u'- Não baseada em GameLoop',
+                u'- Actions and Events based',
                 u'- Actions',
                 u'- Scenes',
                 u'- Director',
                 u'- Transitions',
-                u'- **Cocos2d for iPhone**'
+                u'- Cocos2d for iPhone',
+                ),
+
+   ActionSlide(
+                u'Cocos2d',
+                u'Actions - RotateBy',
+		RotateBy(360, 2),
+                'media/imgs/me.png'),
+
+   ActionSlide(
+                u'Cocos2d',
+                u'Actions - MoveBy',
+		MoveBy( (60, 0), 2),
+                'media/imgs/me.png'),
+
+   ActionSlide(
+                u'Cocos2d',
+                u'Actions - JumpBy',
+		JumpBy((100,100),400, 5, 6),
+                'media/imgs/me.png'),
+
+   ActionSlide(
+                u'Cocos2d',
+                u'Actions - Blink',
+		Blink( 10, 2 ),
+                'media/imgs/me.png'),
+
+   TextSlide(
+                u'Cocos2d',
+                u'- Modificadores',
+                u'-- Reverse',
+                u'-- Accelerate',
+                u'-- AccelDeccel',
+		u'-- Speed'
+		u'-- Actions simultâneas'
                 ),
 
    TextSlide(
-                u'Obrigado!',
+                u'Cocos2d',
+                u'- Efeitos Built-in',
+                u'-- Waves',
+                u'-- Lens',
+		u'-- Muito, muito mais..'
+                ),
+
+   ImageSlide(
+                u'',
+                u'É isso..',
+		image='media/imgs/gameover.png'
+                ),
+   TextSlide(
+                u'Obrigado',
                 u'- Palestra disponivel em:',
                 u'http://github.com/flavioribeiro/softwarefreedomdaycg'
                 ),
@@ -303,8 +384,8 @@ class SlidesManager(object):
 
 
    TextSlide(
-                u'Referências',
-                u'- http://cocos2d.org'
+                u'Referencias',
+                u'- http://cocos2d.org',
                 u'- http://www.slideshare.net/andrewsmedina/',
                 u'- http://www.slideshare.net/r1chardj0n3s/',
                 ),
@@ -321,7 +402,7 @@ class SlidesManager(object):
         scene.add(SlidesManager.slides_pool[SlidesManager.current_position], z=1)
         SlidesManager.current_position+=1
        
-        trans = [ FadeTRTransition, FlipX3DTransition, CornerMoveTransition, ShuffleTransition, FlipY3DTransition, EnvelopeTransition, ZoomTransition ]
+        trans = [ FadeTRTransition, FlipX3DTransition, CornerMoveTransition, FlipY3DTransition ]
         t = choice(trans)
         director.replace( t(scene, duration=1))
 
@@ -340,7 +421,7 @@ class SlidesManager(object):
 
 
 if __name__ == "__main__":
-    director.init(resizable=True, width=1024, height=728, fullscreen=False) 
+    director.init(resizable=True, width=1024, height=728, fullscreen=True) 
     font_path = os.path.join( os.path.dirname(__file__), 'media/fonts')
     font.add_directory(font_path)
 
