@@ -150,16 +150,149 @@ class SlidesManager(object):
                 u'- Falar algo diferente de embarcados e marmota.mobi'
                 ),
 
-            TextSlide(
-                u'Game Concepts',
-                u'- ae',
+            ImageSlide(
+                u'Conceitos',
+                u'- Surface',
+                image="media/imgs/surface.png"
+                ),
+
+            ImageSlide(
+                u'Conceitos',
+                u'- Sprite',
+                image="media/imgs/sprite1.png"
                 ),
 
 
             ImageSlide(
-                u'Ex de Imagem',
-                u'- Esse sou eu!',
-                image="media/imgs/me.png"),
+                u'Conceitos',
+                u'- Sprite',
+                image="media/imgs/sprite2.png"
+                ),
+
+            ImageSlide(
+                u'Conceitos',
+                u'- Rect (Retângulo)',
+                image="media/imgs/rect1.png"
+                ),
+
+            ImageSlide(
+                u'Conceitos',
+                u'- Rect (Retângulo)',
+                image="media/imgs/rect2.png"
+                ),
+
+            ImageSlide(
+                u'Conceitos',
+                u'- Rect (Retângulo)',
+                image="media/imgs/rect3.png"
+                ),
+ 
+            ImageSlide(
+                u'Conceitos',
+                u'- Colisão',
+                image="media/imgs/colisao1.png"
+                ),
+
+            ImageSlide(
+                u'Conceitos',
+                u'- Colisão',
+                image="media/imgs/colisao2.png"
+                ),
+
+
+           TextSlide(
+                u'Conceitos',
+                u'- GameLoop',
+                u'-- Batimento cardíaco do jogo'
+            ),
+ 
+            TextSlide(
+                u'Conceitos',
+                u'- GameLoop',
+                u'-- while jogo_rodando:',
+                u'--    atualizar_jogo()',
+                u'--    desenhar_jogo()',
+                u'',
+                u'- Não controla o tempo.',
+                u'- Hardware diferente == velocidade diferente',
+                ),
+ 
+            TextSlide(
+                u'Conceitos',
+                u'- GameLoop',
+                u'-- Baseado em FPS (Frames por segundo)',
+                u'-- Fixa a atualização do jogo em x vezes por segundo',
+                u'-- Fixa também o jogo em uma unidade de medida "universal" (segundos)',
+                ),
+
+
+           TextSlide(
+                u'Python',
+                u'- Fácil de aprender',
+                u'- Baterias inclusas',
+                u'- Gerencia de tipos e coleções excelente',
+                u'- Multiplataforma (Linux, Windows, Mac, Celulares)',
+                u'- Divertida :-)',
+                u'- Tem várias API\'s pra jogos'
+                ),
+
+           TextSlide(
+                u'Python',
+                u'- Pygame',
+                u'- Pyglet',
+                u'- Cocos2d',
+                u'- Panda3D',
+                u'- PyOgre, Soya3d, etc...'
+                ),
+
+ 
+           TextSlide(
+                u'Python',
+                u'- Quem utiliza Python pra Games?',
+                ),
+        
+         ImageSlide(
+                u'Python',
+                u'Frets on Fire',
+                image='media/imgs/fretsonfire.png'
+                ),
+
+
+         ImageSlide(
+                u'Python',
+                u'Civilization',
+                image='media/imgs/civilization.png'
+                ),
+
+
+
+         ImageSlide(
+                u'Python',
+                u'InterZone',
+                image='media/imgs/interzone.png'
+                ),
+
+          TextSlide(
+                u'Pygame',
+                u'- Mais popular',
+                u'- SDL (Simple DirectMedia Layer)',
+                u'- Implementa colisões, dirty rect, etc',
+                u'- GameLoop Based',
+                u'- Modular',
+                u'- Otimizado',
+                ),
+
+   TextSlide(
+                u'Cocos2d',
+                u'- Curva de aprendizado baixa',
+                u'- Não baseada em GameLoop',
+                u'- Actions',
+                u'- Scenes',
+                u'- Director',
+                u'- Transitions',
+                u'- **Cocos2d for iPhone**'
+                ),
+
 
         ]
 
