@@ -14,6 +14,7 @@ from pyglet import font
 from pyglet.window import key
 
 import os
+from random import choice
 
 class Presentation(Scene):
 
@@ -293,7 +294,20 @@ class SlidesManager(object):
                 u'- **Cocos2d for iPhone**'
                 ),
 
+   TextSlide(
+                u'Obrigado!',
+                u'- Palestra disponivel em:',
+                u'http://github.com/flavioribeiro/softwarefreedomdaycg'
+                ),
 
+
+
+   TextSlide(
+                u'Referências',
+                u'- http://cocos2d.org'
+                u'- http://www.slideshare.net/andrewsmedina/',
+                u'- http://www.slideshare.net/r1chardj0n3s/',
+                ),
         ]
 
         self.__class__.current_position = 0
@@ -306,7 +320,10 @@ class SlidesManager(object):
         scene = Scene(Presentation())
         scene.add(SlidesManager.slides_pool[SlidesManager.current_position], z=1)
         SlidesManager.current_position+=1
-        director.push(scene)
+       
+        trans = [ FadeTRTransition, FlipX3DTransition, CornerMoveTransition, ShuffleTransition, FlipY3DTransition, EnvelopeTransition, TurnOffTilesTransition, ZoomTransition ]
+        t = choice(trans)
+        director.replace( t(scene, duration=1))
 
     @staticmethod
     def previous():
